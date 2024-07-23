@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>文件IO | 首页</title><meta name="author" content="Warren Bu"><meta name="copyright" content="Warren Bu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="C与硬盘数据交互的方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件IO">
+<meta property="og:url" content="http://example.com/2024/07/18/%E6%96%87%E4%BB%B6IO/index.html">
+<meta property="og:site_name" content="首页">
+<meta property="og:description" content="C与硬盘数据交互的方式">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/A019.png">
+<meta property="article:published_time" content="2024-07-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-17T16:00:00.000Z">
+<meta property="article:author" content="Warren Bu">
+<meta property="article:tag" content="标签">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/A019.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/07/18/%E6%96%87%E4%BB%B6IO/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '文件IO',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-07-18 00:00:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/B001.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页 Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档 Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签 Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类 Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接 Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/A002_.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="首页"><span class="site-name">首页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页 Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档 Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签 Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类 Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接 Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">文件IO</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-17T16:00:00.000Z" title="Created 2024-07-18 00:00:00">2024-07-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-07-17T16:00:00.000Z" title="Updated 2024-07-18 00:00:00">2024-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E7%B1%BB/">分类</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="文件IO"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前瞻"><a href="#前瞻" class="headerlink" title="前瞻"></a>前瞻</h1><p>文件IO要求我们熟悉各种库函数。能够根据需求和数据类型，选择使用不同的库函数来操作数据。<br>因此，深刻理解这些函数之间的区别和具体实现原理非常重要。<br>这里我将这些函数按操作对象上分为：C内部和流之间、C内部和C内部的函数。<br>根据操作的数据类型上分为，操作二进制数据、操作格式化数据的函数。<br>两种分类更加利于在看到需求时精确定位到应该使用什么函数</p>
+<h1 id="必要时调整光标指针-lseek-fseek-ftell-rewind"><a href="#必要时调整光标指针-lseek-fseek-ftell-rewind" class="headerlink" title="必要时调整光标指针 lseek fseek ftell rewind"></a>必要时调整光标指针 lseek fseek ftell rewind</h1><p>无论使用哪一个IO，同一个文件描述符或FILE都共享同一个文件光标。<br>也就是说，只要文件描述符相同，同时读写将会出现不确定行为，因为光标在两个函数的操作下同时移动</p>
+<h1 id="极少用到的系统IO-：-open-close-write-read"><a href="#极少用到的系统IO-：-open-close-write-read" class="headerlink" title="极少用到的系统IO ： open close write read"></a>极少用到的系统IO ： open close write read</h1><p>所有的读写操作都直接通过文件描述符进行，进入内核空间<br>劣势：代码复杂，特别是在处理结构化数据时。错误处理机制不如标准IO。没有缓冲机制，会比较消耗资源<br>优势：更底层，可以精准控制和精细操作</p>
+<ol>
+<li>文件读写将会有一个文件指针，即光标。光标可以理解为一个指针，文件在操作时光标会随之偏移。在初级的文件IO中用户可以使用lseek和文件描述符来控制这个指针。</li>
+<li>在给main函数传递参数时，argv[0]是默认留给命令行第一个字符串的，因此文件名应该从argv[1]开始</li>
+<li>使用缓冲区时，常常需要将缓冲区清零。创建时：char buf[10]&#x3D;{0}; 一般时：memset(buf,’\0’,10);</li>
+</ol>
+<h1 id="较为常用的标准IO-stdio-h"><a href="#较为常用的标准IO-stdio-h" class="headerlink" title="较为常用的标准IO : stdio.h"></a>较为常用的标准IO : stdio.h</h1><p>常见的数据类型：二进制数据（结构体、数组等），结构化数据（json、xml或者以逗号，空格分开的基础格式）</p>
+<h2 id="对于二进制数据：fopen-fclose-fread-fwrite-fleek"><a href="#对于二进制数据：fopen-fclose-fread-fwrite-fleek" class="headerlink" title="对于二进制数据：fopen fclose fread fwrite fleek"></a>对于二进制数据：fopen fclose fread fwrite fleek</h2><p>操作二进制数据非常方便，成块的操作内容。操作结构化的数据读写的一般为二进制文件。</p>
+<h3 id="fread-buff，size4-nmemb3-FILE-stream"><a href="#fread-buff，size4-nmemb3-FILE-stream" class="headerlink" title="fread(buff，size4,nmemb3,FILE * stream);"></a>fread(buff，size4,nmemb3,FILE * stream);</h3><p>比如文件中有10个字符<br>按4个字符的单位来读，读3次。返回值是读4个的次数。如果某一次发现不够4个字符，就读剩余的，且设置文件流结束标志EOF，且本次不算一次完整读写。因此返回值为3.<br>但是一般不会使用fread来操作字符数据。而是操作块数据，以字符为块只是为了理解原理，常见用法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历所有</span></span><br><span class="line">Student student;</span><br><span class="line">    <span class="keyword">while</span> (fread(&amp;student, <span class="keyword">sizeof</span>(Student), <span class="number">1</span>, file)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;ID: %s, Name: %s, Age: %s, Sex: %s\n&quot;</span>, student.id, student.name, student.age, student.sex);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//遍历+查找</span></span><br><span class="line"><span class="keyword">while</span> (fread(student, <span class="keyword">sizeof</span>(Student), <span class="number">1</span>, file)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(student-&gt;id, id) == <span class="number">0</span>) &#123;</span><br><span class="line">            fclose(file);</span><br><span class="line">            <span class="keyword">return</span> student;</span><br><span class="line">        &#125;</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="fwrite-buff，size4-nmemb3-FILE-stream"><a href="#fwrite-buff，size4-nmemb3-FILE-stream" class="headerlink" title="fwrite(buff，size4,nmemb3,FILE * stream);"></a>fwrite(buff，size4,nmemb3,FILE * stream);</h3><p>发现不够4个字符时，函数也会继续读满4个包括后面未定义在内的字符,将其强制写入文件流。</p>
+<p>也就是说没有其它错误的情况下，即便buff值不够，也会正确返回nmenb3？？？？？？？？？？？？？好像不是，但是编译器确实给我返回了3</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//fwrite函数写入未定义字符到文件，会发生什么？是否会算一次完整的写入？</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">example5</span><span class="params">()</span> &#123;</span><br><span class="line">	FILE *fp = fopen(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line"><span class="type">char</span> buffer[<span class="number">13</span>]=<span class="string">&quot;123456789012&quot;</span>;</span><br><span class="line"><span class="type">size_t</span> result = fwrite(buffer, <span class="number">3</span>,<span class="number">4</span> , fp);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%ld times write.\n&quot;</span>, result);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;buffer: %s\n&quot;</span>, buffer);</span><br><span class="line">fclose(fp);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大佬帮我看看，万分感谢<br>当然，大部分情况下我们读写都是成块操作，并不会遇到块不完整的情况。<br>常见用法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fwrite(student, <span class="keyword">sizeof</span>(Student), <span class="number">1</span>, file);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="对格式化数据简单处理（C与流之间数据交换）"><a href="#对格式化数据简单处理（C与流之间数据交换）" class="headerlink" title="对格式化数据简单处理（C与流之间数据交换）"></a>对格式化数据简单处理（C与流之间数据交换）</h2><h3 id="fgets-缓冲区-最多读取数-1-流指针"><a href="#fgets-缓冲区-最多读取数-1-流指针" class="headerlink" title="fgets(缓冲区,最多读取数+1,流指针)"></a>fgets(缓冲区,最多读取数+1,流指针)</h3><p>最大特点是遇到换行提前结束，因此他适合按行读取文件内容到用户缓冲区。<br>当然也可以从stdin中读。</p>
+<p>以下是遇到\n提前结束读取：<br>流内容：abc\ndef\n<br>fgets一次后缓存区：abc\n\0<br>fgets一次后流内容:def\n</p>
+<p>以下是没遇到\n,按第二个参数读取：<br>fgets(buffer, sizeof(buffer), stdin)&#x2F;&#x2F;buffer[3]<br>流内容：abcdef\nghijkl\n<br>fgets一次后缓存区：ab\0<br>fgets一次后流内容:cdef\nghijkl\n<br>当我们char buffer[10]时,如果希望它为字符串，那么最多写9个字符<br>fgets(buffer, sizeof(buffer), stdin)最多读取数为9，第二个参数为10</p>
+<h3 id="fputs"><a href="#fputs" class="headerlink" title="fputs"></a>fputs</h3><p>最大特点是按\0来提前结束写入，因此它适合写入一个完整的字符串内容到流中<br>从缓冲区读取字符到文件，遇到\0会停止，\0不会读到文件中，字符串中\n不会打断读取，因此可以在缓冲区中写\n来分行存入。</p>
+<p>一般来说，不会遇到提前结束，因为字符串中出现\0就意味着结束，而且由于是放入文件中，因此不用像fgets一样设置第二参数防止内容溢出，因此fputs使用起来就相当简单了。当然，如果缓冲区中没有\0,将会越界读取，可能导致文件崩溃。</p>
+<h2 id="对格式化数据格式化处理-之：-C与流之间的数据交换"><a href="#对格式化数据格式化处理-之：-C与流之间的数据交换" class="headerlink" title="对格式化数据格式化处理 之： C与流之间的数据交换"></a>对格式化数据格式化处理 之： C与流之间的数据交换</h2><p>%s格式说明符，表示读取字符，直到空白符停止，空白符包括’ ‘’\t’’\n’’\r’’\v’’\f’</p>
+<h3 id="fscanf（fgets的格式化）"><a href="#fscanf（fgets的格式化）" class="headerlink" title="fscanf（fgets的格式化）"></a>fscanf（fgets的格式化）</h3><p>从流中，格式化地读取内容到用户缓存区，如果不完全能匹配上，则<em>返回值</em>为前面匹配上的数量，且文件光标将停止在不匹配的内容前面。进化版的scanf。</p>
+<p>而且，fscanf将不会跳过任何一个字符，比如fscanf(fp, “:%s”,str);只要fp的开头没有冒号，将直接返回-1，这点和scanf一样。<br>也就是说，三种情况：完全匹配上、匹配到一半、一开始就没匹配上</p>
+<p>提高匹配的格式：例如使用%[^ ]作为格式化以空白结尾的字符串，%[^,]格式化以逗号分隔的字符串</p>
+<h3 id="fprintf（fputs的格式化）"><a href="#fprintf（fputs的格式化）" class="headerlink" title="fprintf（fputs的格式化）"></a>fprintf（fputs的格式化）</h3><p>格式化将内容送到流，进化版的printf。</p>
+<h2 id="对格式化数据格式化处理-之：C内部的数据交换"><a href="#对格式化数据格式化处理-之：C内部的数据交换" class="headerlink" title="对格式化数据格式化处理 之：C内部的数据交换"></a>对格式化数据格式化处理 之：C内部的数据交换</h2><h3 id="sscanf（标准拆分）"><a href="#sscanf（标准拆分）" class="headerlink" title="sscanf（标准拆分）"></a>sscanf（标准拆分）</h3><p>将用户缓存区的内容，参考格式，提取到变量中</p>
+<h3 id="sprintf-（标准拼接）"><a href="#sprintf-（标准拼接）" class="headerlink" title="sprintf （标准拼接）"></a>sprintf （标准拼接）</h3><p>将变量中的内容，加上格式，放到用户缓存区中。<br>如果需要控制截断，或者设置多一个防止缓冲区溢出的参数，可以使用snprintf</p>
+<h2 id="错误处理机制-：-ferror、feof、perror和clearerr"><a href="#错误处理机制-：-ferror、feof、perror和clearerr" class="headerlink" title="错误处理机制 ： ferror、feof、perror和clearerr"></a>错误处理机制 ： ferror、feof、perror和clearerr</h2><p>优秀的错误处理机制也是标准IO的优势，必须用</p>
+<p>perror(参数)会获取最近一次发生错误的错误信息，打印在参数后面。因此常用在类似fp &#x3D;&#x3D; NULL的条件下打印具体错误信息</p>
+<p>ferror（fp)会判断fp的错误并且返回非零值，因此适合作为可能出错的地方的if的判断值，一般配合perror使用。例如</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">写文件代码;</span><br><span class="line"><span class="keyword">if</span> (ferror(fp)) &#123;</span><br><span class="line">    perror(<span class="string">&quot;Error writing to file&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>feof(fd) 返回文件是否有结束标志，常用于fread和fget等函数，当文件流结束时，置非零数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FILE *fp = fopen(<span class="string">&quot;example.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="type">char</span> buffer[<span class="number">10</span>];</span><br><span class="line"><span class="type">size_t</span> result = fread(buffer, <span class="number">1</span>, <span class="number">10</span>, fp);</span><br><span class="line"><span class="keyword">if</span> (result &lt; <span class="number">10</span> &amp;&amp; feof(fp)) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;End of file reached.\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">fclose(fp);</span><br></pre></td></tr></table></figure>
+
+<p>clearerr，当有可能出现错误，或EOF被置位时，我们还需要操作文件但又不希望关闭又开启。<br>此时，我们应该清除文件流的错误和文件流结束标志。clearerr(fp);<br>如果还需要移动光标到开头，使用rewind(fp)，一次达成两个愿望！</p>
+<h2 id="与stdin、stdout、stderr等流的交互：scanf-fgets-fgetc"><a href="#与stdin、stdout、stderr等流的交互：scanf-fgets-fgetc" class="headerlink" title="与stdin、stdout、stderr等流的交互：scanf fgets fgetc"></a>与stdin、stdout、stderr等流的交互：scanf fgets fgetc</h2><h3 id="stdin"><a href="#stdin" class="headerlink" title="stdin"></a>stdin</h3><p>标准输入流，一般连接的是键盘，类似一个队列，内容先进先出。比如输入abc，那么先出去的是a</p>
+<h3 id="scanf（从stdin格式化读取数据到地址参数去）"><a href="#scanf（从stdin格式化读取数据到地址参数去）" class="headerlink" title="scanf（从stdin格式化读取数据到地址参数去）"></a>scanf（从stdin格式化读取数据到地址参数去）</h3><p>初学时我们就常用scanf来从stdin中输入内容。<br>scanf可以标准化输入的长度， scanf(“%9s”, str);只接收九个字符，且在第十个位置加一个\0.如果遇到\n则提前结束，且把\n换成\0<br>也就是说，scanf可以防止输入内容越界，但是会将\n留在stdin中。</p>
+<p>以下是常见解决方法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%9s&quot;</span>, str);</span><br><span class="line"><span class="keyword">while</span> (getchar() != <span class="string">&#x27;\n&#x27;</span>);  <span class="comment">// 清除缓冲区中的所有字符，直到换行符</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="fgets-str-sizeof-str-stdin-将流（文件流也可以）的内容get到用户缓冲区去"><a href="#fgets-str-sizeof-str-stdin-将流（文件流也可以）的内容get到用户缓冲区去" class="headerlink" title="fgets(str, sizeof(str), stdin) 将流（文件流也可以）的内容get到用户缓冲区去"></a>fgets(str, sizeof(str), stdin) 将流（文件流也可以）的内容get到用户缓冲区去</h3><p>利用fgets的整行读取，我们可以获取包括\n在内的整行内容，且fgets会在\n后面补一个\0.如果不需要\n，可以这样操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (fgets(str, <span class="keyword">sizeof</span>(str), <span class="built_in">stdin</span>) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="type">size_t</span> len = <span class="built_in">strlen</span>(str);</span><br><span class="line">        <span class="keyword">if</span> (len &gt; <span class="number">0</span> &amp;&amp; str[len<span class="number">-1</span>] == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">            str[len<span class="number">-1</span>] = <span class="string">&#x27;\0&#x27;</span>;  <span class="comment">// 替换换行符为字符串终止符</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件的属性"><a href="#文件的属性" class="headerlink" title="文件的属性"></a>文件的属性</h1><h2 id="stat-fstat-istat"><a href="#stat-fstat-istat" class="headerlink" title="stat fstat istat"></a>stat fstat istat</h2><p>我们man 2 stat可以看到stat函数以及结构体stat的内容。从stat</p>
+<h2 id="设备号-stat-st-dev"><a href="#设备号-stat-st-dev" class="headerlink" title="设备号 stat.st_dev"></a>设备号 stat.st_dev</h2><p>每个文件都会有设备号，一般的文件会归属于一个设备，比如在桌面上创建一个文件，这个文件就归属于硬盘设备，stat.st_dev可以获得文件所属的的设备的设备号，也就是文件系统的设备号<br>特殊的文件自己会有一个设备号，例如块设备，字符设备。比如说一个键盘，那么我们可以通过stat.st_rdev获取设备号</p>
+<p>其次，设备号又分为主设备号和次设备号，通过major和minor函数获取。<br>主设备号规范了设备类型，次设备号即序号,类似前面的fd</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">print_dev_no</span><span class="params">(<span class="type">char</span>* dev_name)</span> &#123;</span><br><span class="line">	<span class="type">int</span> major, minor;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">st</span>;</span></span><br><span class="line">	stat(dev_name,&amp;st);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;major number: %d\n&quot;</span>,major(st.st_dev));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;minor number: %d\n&quot;</span>,minor(st.st_dev));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型与权限-stat-st-mode"><a href="#类型与权限-stat-st-mode" class="headerlink" title="类型与权限 stat.st_mode"></a>类型与权限 stat.st_mode</h2><p>stat.st_mode是一个16位二进制数<br>通过宏定义可以拿到文件类型</p>
+<h1 id="目录文件（遇到的第一种特殊文件）"><a href="#目录文件（遇到的第一种特殊文件）" class="headerlink" title="目录文件（遇到的第一种特殊文件）"></a>目录文件（遇到的第一种特殊文件）</h1><p>通过操作目录文件，我们可以在Linux中的结构中随意移动，去到需要去的地方，找到需要的文件，创建文件到特定的地方。</p>
+<h2 id="目录文件是如何被解析的"><a href="#目录文件是如何被解析的" class="headerlink" title="目录文件是如何被解析的"></a>目录文件是如何被解析的</h2><p>目录文件中包括<em>目录文件名</em>和<em>索引号</em><br>当我们需要拿目录下内容的地址时，<br>vi &#x2F;root&#x2F;usr&#x2F;hello.c<br>路径解析：</p>
+<ol>
+<li>&#x2F; 中找 root，找到 root 的i-node号100。</li>
+<li>通过i-node号100，访问 root 目录文件。</li>
+<li>在 root 目录文件中找 usr，找到 usr 的i-node号200。</li>
+<li>通过i-node号200，访问 usr 目录文件。</li>
+<li>在 usr 目录文件中找 hello.c，找到 hello.c 的i-node号300。</li>
+<li>通过i-node号300，访问 hello.c 文件的数据块。</li>
+</ol>
+<h2 id="C中如何与目录文件交互"><a href="#C中如何与目录文件交互" class="headerlink" title="C中如何与目录文件交互"></a>C中如何与目录文件交互</h2><h3 id="创建和删除目录-mkdir和rmdir"><a href="#创建和删除目录-mkdir和rmdir" class="headerlink" title="创建和删除目录 mkdir和rmdir"></a>创建和删除目录 mkdir和rmdir</h3><h3 id="打开和读取关闭目录：opendir-readdir-closedir"><a href="#打开和读取关闭目录：opendir-readdir-closedir" class="headerlink" title="打开和读取关闭目录：opendir readdir closedir"></a>打开和读取关闭目录：opendir readdir closedir</h3><p>三个需要配合使用。和普通文件一样，需要打开，需要读取内容，也需要关闭文件<br>每次读取目录下的一个文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DIR* dir = opendir(path);</span><br><span class="line"><span class="keyword">while</span>((dirent = readdir(dir))!= <span class="literal">NULL</span>)&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;文件名:%s\n&quot;</span>,dirent-&gt;d_name);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;文件类型:%uud\n&quot;</span>,dirent-&gt;type);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;文件i-node索引:%d\n&quot;</span>,dirent-&gt;d_ino);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Warren Bu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/07/18/%E6%96%87%E4%BB%B6IO/">http://example.com/2024/07/18/%E6%96%87%E4%BB%B6IO/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A0%87%E7%AD%BE/">标签</a></div><div class="post_share"><div class="social-share" data-image="/images/A019.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>Sponsor</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.JPG" target="_blank"><img class="post-qr-code-img" src="/images/wechat.JPG" alt="微信wechat"/></a><div class="post-qr-code-desc">微信wechat</div></li><li class="reward-item"><a href="/images/alipay.JPG" target="_blank"><img class="post-qr-code-img" src="/images/alipay.JPG" alt="支付宝alipay"/></a><div class="post-qr-code-desc">支付宝alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2024/07/13/STM32/" title="STM32开发"><img class="cover" src="/images/A022.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">STM32开发</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/04/08/51%E5%8D%95%E7%89%87%E6%9C%BA/" title="51单片机(C语言)"><img class="cover" src="/images/A015.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-08</div><div class="title">51单片机(C语言)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/B001.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Warren Bu</div><div class="author-info__description">卜伟豪</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">26</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/buweihao/buweihao.github.io"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://buweihao.github.io" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-brands fa-youtube" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">本科:仲恺农业工程学院(2021-2025) 专业:电子信息工程</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%9E%BB"><span class="toc-number">1.</span> <span class="toc-text">前瞻</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%85%E8%A6%81%E6%97%B6%E8%B0%83%E6%95%B4%E5%85%89%E6%A0%87%E6%8C%87%E9%92%88-lseek-fseek-ftell-rewind"><span class="toc-number">2.</span> <span class="toc-text">必要时调整光标指针 lseek fseek ftell rewind</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%81%E5%B0%91%E7%94%A8%E5%88%B0%E7%9A%84%E7%B3%BB%E7%BB%9FIO-%EF%BC%9A-open-close-write-read"><span class="toc-number">3.</span> <span class="toc-text">极少用到的系统IO ： open close write read</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%83%E4%B8%BA%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A0%87%E5%87%86IO-stdio-h"><span class="toc-number">4.</span> <span class="toc-text">较为常用的标准IO : stdio.h</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%EF%BC%9Afopen-fclose-fread-fwrite-fleek"><span class="toc-number">4.1.</span> <span class="toc-text">对于二进制数据：fopen fclose fread fwrite fleek</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fread-buff%EF%BC%8Csize4-nmemb3-FILE-stream"><span class="toc-number">4.1.1.</span> <span class="toc-text">fread(buff，size4,nmemb3,FILE * stream);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fwrite-buff%EF%BC%8Csize4-nmemb3-FILE-stream"><span class="toc-number">4.1.2.</span> <span class="toc-text">fwrite(buff，size4,nmemb3,FILE * stream);</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E7%AE%80%E5%8D%95%E5%A4%84%E7%90%86%EF%BC%88C%E4%B8%8E%E6%B5%81%E4%B9%8B%E9%97%B4%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">对格式化数据简单处理（C与流之间数据交换）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fgets-%E7%BC%93%E5%86%B2%E5%8C%BA-%E6%9C%80%E5%A4%9A%E8%AF%BB%E5%8F%96%E6%95%B0-1-%E6%B5%81%E6%8C%87%E9%92%88"><span class="toc-number">4.2.1.</span> <span class="toc-text">fgets(缓冲区,最多读取数+1,流指针)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fputs"><span class="toc-number">4.2.2.</span> <span class="toc-text">fputs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%A4%84%E7%90%86-%E4%B9%8B%EF%BC%9A-C%E4%B8%8E%E6%B5%81%E4%B9%8B%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.3.</span> <span class="toc-text">对格式化数据格式化处理 之： C与流之间的数据交换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fscanf%EF%BC%88fgets%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%89"><span class="toc-number">4.3.1.</span> <span class="toc-text">fscanf（fgets的格式化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fprintf%EF%BC%88fputs%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%EF%BC%89"><span class="toc-number">4.3.2.</span> <span class="toc-text">fprintf（fputs的格式化）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%A4%84%E7%90%86-%E4%B9%8B%EF%BC%9AC%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.4.</span> <span class="toc-text">对格式化数据格式化处理 之：C内部的数据交换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sscanf%EF%BC%88%E6%A0%87%E5%87%86%E6%8B%86%E5%88%86%EF%BC%89"><span class="toc-number">4.4.1.</span> <span class="toc-text">sscanf（标准拆分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sprintf-%EF%BC%88%E6%A0%87%E5%87%86%E6%8B%BC%E6%8E%A5%EF%BC%89"><span class="toc-number">4.4.2.</span> <span class="toc-text">sprintf （标准拼接）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6-%EF%BC%9A-ferror%E3%80%81feof%E3%80%81perror%E5%92%8Cclearerr"><span class="toc-number">4.5.</span> <span class="toc-text">错误处理机制 ： ferror、feof、perror和clearerr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8Estdin%E3%80%81stdout%E3%80%81stderr%E7%AD%89%E6%B5%81%E7%9A%84%E4%BA%A4%E4%BA%92%EF%BC%9Ascanf-fgets-fgetc"><span class="toc-number">4.6.</span> <span class="toc-text">与stdin、stdout、stderr等流的交互：scanf fgets fgetc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#stdin"><span class="toc-number">4.6.1.</span> <span class="toc-text">stdin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scanf%EF%BC%88%E4%BB%8Estdin%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E5%88%B0%E5%9C%B0%E5%9D%80%E5%8F%82%E6%95%B0%E5%8E%BB%EF%BC%89"><span class="toc-number">4.6.2.</span> <span class="toc-text">scanf（从stdin格式化读取数据到地址参数去）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fgets-str-sizeof-str-stdin-%E5%B0%86%E6%B5%81%EF%BC%88%E6%96%87%E4%BB%B6%E6%B5%81%E4%B9%9F%E5%8F%AF%E4%BB%A5%EF%BC%89%E7%9A%84%E5%86%85%E5%AE%B9get%E5%88%B0%E7%94%A8%E6%88%B7%E7%BC%93%E5%86%B2%E5%8C%BA%E5%8E%BB"><span class="toc-number">4.6.3.</span> <span class="toc-text">fgets(str, sizeof(str), stdin) 将流（文件流也可以）的内容get到用户缓冲区去</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">文件的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#stat-fstat-istat"><span class="toc-number">5.1.</span> <span class="toc-text">stat fstat istat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%8F%B7-stat-st-dev"><span class="toc-number">5.2.</span> <span class="toc-text">设备号 stat.st_dev</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%9D%83%E9%99%90-stat-st-mode"><span class="toc-number">5.3.</span> <span class="toc-text">类型与权限 stat.st_mode</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%EF%BC%88%E9%81%87%E5%88%B0%E7%9A%84%E7%AC%AC%E4%B8%80%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">目录文件（遇到的第一种特殊文件）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E6%98%AF%E5%A6%82%E4%BD%95%E8%A2%AB%E8%A7%A3%E6%9E%90%E7%9A%84"><span class="toc-number">6.1.</span> <span class="toc-text">目录文件是如何被解析的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C%E4%B8%AD%E5%A6%82%E4%BD%95%E4%B8%8E%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E4%BA%A4%E4%BA%92"><span class="toc-number">6.2.</span> <span class="toc-text">C中如何与目录文件交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95-mkdir%E5%92%8Crmdir"><span class="toc-number">6.2.1.</span> <span class="toc-text">创建和删除目录 mkdir和rmdir</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E5%92%8C%E8%AF%BB%E5%8F%96%E5%85%B3%E9%97%AD%E7%9B%AE%E5%BD%95%EF%BC%9Aopendir-readdir-closedir"><span class="toc-number">6.2.2.</span> <span class="toc-text">打开和读取关闭目录：opendir readdir closedir</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/18/%E6%96%87%E4%BB%B6IO/" title="文件IO"><img src="/images/A019.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件IO"/></a><div class="content"><a class="title" href="/2024/07/18/%E6%96%87%E4%BB%B6IO/" title="文件IO">文件IO</a><time datetime="2024-07-17T16:00:00.000Z" title="Created 2024-07-18 00:00:00">2024-07-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/13/STM32/" title="STM32开发"><img src="/images/A022.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="STM32开发"/></a><div class="content"><a class="title" href="/2024/07/13/STM32/" title="STM32开发">STM32开发</a><time datetime="2024-07-12T16:00:00.000Z" title="Created 2024-07-13 00:00:00">2024-07-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/11/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" title="嵌入式 for MacM1 开发环境 （Windows用户也有惊喜）"><img src="/images/A021.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="嵌入式 for MacM1 开发环境 （Windows用户也有惊喜）"/></a><div class="content"><a class="title" href="/2024/07/11/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" title="嵌入式 for MacM1 开发环境 （Windows用户也有惊喜）">嵌入式 for MacM1 开发环境 （Windows用户也有惊喜）</a><time datetime="2024-07-10T16:00:00.000Z" title="Created 2024-07-11 00:00:00">2024-07-11</time></div></div></div></div></div></div></main><footer id="footer" style="background: rgb(186,215,235)"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By Warren Bu</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hey,wel you come</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
